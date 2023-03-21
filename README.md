@@ -27,10 +27,9 @@ Mannco Store Enhancer is a browser extension that enhances the Mannco Store webs
 - **Other small fixes:** The extension includes various small fixes and improvements to make your browsing experience smoother.
 
 - **In-development features: The following features are currently in development:**
-
--- Menu showing prices from backpack.tf, as well as potentially other sites.
--- Beautification of the header on the page.
--- Option to execute the buttons via keyboard keypress
+ - Menu showing prices from backpack.tf, as well as potentially other sites.
+ - Beautification of the header on the page.
+ - Option to execute the buttons via keyboard keypress
 
 ##Installation
 - Install [Tampermonkey](https://www.tampermonkey.net/). 
