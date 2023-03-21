@@ -13,8 +13,8 @@
 
 // @homepageURL  https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer
 // @supportURL   https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer/issues
-// @downloadURL  https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer/raw/main/Mannco.Store-Item_Page_Enhancer
-// @updateURL    https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer/raw/main/Mannco.Store-Item_Page_Enhancer
+// @downloadURL  https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer/raw/main/Mannco.Store-Item_Page_Enhancer.user.js
+// @updateURL    https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer/raw/main/Mannco.Store-Item_Page_Enhancer.user.js
 // ==/UserScript==
 
 (function () {
