@@ -24,7 +24,7 @@ Mannco Store Enhancer is a browser extension that enhances the Mannco Store webs
 ## Installation
 
 1. Install [Tampermonkey](https://www.tampermonkey.net/).
-2. Open the script in [raw view](.user.js).
+2. Open the script in [raw view](https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer/raw/main/Mannco.Store-Item_Page_Enhancer.user.js).
 3. Install.
 
 ## Images
