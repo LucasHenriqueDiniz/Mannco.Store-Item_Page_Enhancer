@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Mannco.Store - Item Page Enhancer
 // @namespace    https://github.com/LucasHenriqueDiniz
-// @version      0.1
-// @description  ...
+// @version      0.2
+// @description  Mannco Store Enhancer is a browser extension that enhances the Mannco Store website with a range of features to make your shopping experience more efficient and streamlined.
 // @author       Lucas Diniz
 // @match        *://mannco.store/item/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=mannco.store
@@ -13,8 +13,8 @@
 
 // @homepageURL  https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer
 // @supportURL   https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer/issues
-// @downloadURL  
-// @updateURL    
+// @downloadURL  https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer/raw/main/Mannco.Store-Item_Page_Enhancer
+// @updateURL    https://github.com/LucasHenriqueDiniz/Mannco.Store-Item_Page_Enhancer/raw/main/Mannco.Store-Item_Page_Enhancer
 // ==/UserScript==
 
 (function () {
