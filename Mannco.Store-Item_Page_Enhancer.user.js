@@ -1888,6 +1888,11 @@
             var cardBodies = document.querySelectorAll('.card-body');
             cardBodies.forEach(cardBody => {
                 cardBody.style.boxShadow = '3 3 15px rgba(0, 0, 0, 0.3)';
+	//remove global alert
+	if (document.querySelector(".global-alert")) {
+	   	document.querySelector("#wrapper > div.global-alert").display = 'none'
+	}
+
             });
             break;
         case false:
