@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mannco.Store - Item Page Enhancer
 // @namespace    https://github.com/LucasHenriqueDiniz
-// @version      0.3
+// @version      0.31
 // @description  mannco.store - Mannco Store Enhancer is a browser extension that enhances the Mannco Store website with a range of features to make your shopping experience more efficient and streamlined.
 // @author       Lucas Diniz
 // @license      MIT
@@ -1961,10 +1961,17 @@
     switch (copyPriceToClipboard) {
         case true:
             var itemPriceText = document.querySelector("#content > div.row > div:nth-child(1) > div > div > span.important-text")
-            googleIcon('content_copy', 'scale-arrow copy-icon', itemPriceText, 'font-size: 1.25rem; translate: 0px -1rem;')
-            document.querySelector("#scale-arrow\\ copy-icon").addEventListener('click', () => {
+            googleIcon('content_copy', 'scale-arrow price-copy', itemPriceText, 'font-size: 1.25rem; translate: 0px -1rem;')
+            document.querySelector("#scale-arrow\\ price-copy").addEventListener('click', () => {
                 console.log(`copied the price to the clipboard, price = ${itemPrice}`)
                 GM_setClipboard(itemPrice)
+            })
+
+            var itemNameText = document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > h2 > span")
+             googleIcon('content_copy', 'scale-arrow text-copy', itemNameText, 'font-size: 1.25rem; translate: 0px -0.5rem;')
+            document.querySelector("#scale-arrow\\ text-copy").addEventListener('click', () => {
+                console.log(`copied the name to the clipboard, price = ${itemName}`)
+                GM_setClipboard(itemName)
             })
             break;
         case false:
