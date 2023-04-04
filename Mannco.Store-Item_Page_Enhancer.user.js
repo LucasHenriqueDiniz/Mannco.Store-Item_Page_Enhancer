@@ -4,6 +4,7 @@
 // @version      0.3
 // @description  Mannco Store Enhancer is a browser extension that enhances the Mannco Store website with a range of features to make your shopping experience more efficient and streamlined.
 // @author       Lucas Diniz
+// @license      MIT
 // @match        *://mannco.store/item/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=mannco.store
 // @grant        GM_getValue
