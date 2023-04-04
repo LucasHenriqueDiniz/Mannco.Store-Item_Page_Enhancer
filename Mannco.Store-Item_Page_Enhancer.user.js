@@ -2,7 +2,7 @@
 // @name         Mannco.Store - Item Page Enhancer
 // @namespace    https://github.com/LucasHenriqueDiniz
 // @version      0.3
-// @description  Mannco Store Enhancer is a browser extension that enhances the Mannco Store website with a range of features to make your shopping experience more efficient and streamlined.
+// @description  mannco.store - Mannco Store Enhancer is a browser extension that enhances the Mannco Store website with a range of features to make your shopping experience more efficient and streamlined.
 // @author       Lucas Diniz
 // @license      MIT
 // @match        *://mannco.store/item/*
