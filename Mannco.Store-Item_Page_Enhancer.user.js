@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mannco.Store - Item Page Enhancer
 // @namespace    https://github.com/LucasHenriqueDiniz
-// @version      0.31
+// @version      0.32
 // @description  mannco.store - Mannco Store Enhancer is a browser extension that enhances the Mannco Store website with a range of features to make your shopping experience more efficient and streamlined.
 // @author       Lucas Diniz
 // @license      MIT
@@ -1992,7 +1992,7 @@
     const itemCard = document.querySelector("#page-sidebar > div.card.mb-0")
     const total = itemCard.clientHeight
 
-    itemCard.style.height = document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item").clientHeight + 60 + 'px'
+    itemCard.style.height = document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > img").clientHeight + document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > h2 > span").clientHeight + 35 + 'px'
     itemCard.style.overflow = 'hidden'
     itemCard.style.transition = 'ease-out 200ms'
     itemCard.style.transitionProperty = 'height'
@@ -2011,7 +2011,7 @@
             itemHideButton.dataset.value = "on";
             document.querySelector("#hide-arrow\\ item").innerHTML = 'expand_more'
             itemHideButton.title = "Show item status";
-            itemCard.style.height = document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item").clientHeight + 60 + 'px'
+            itemCard.style.height = document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > img").clientHeight + document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > h2 > span").clientHeight + 35 + 'px'
         } else {
             itemHideButton.dataset.value = "off";
             document.querySelector("#hide-arrow\\ item").innerHTML = 'expand_less'
