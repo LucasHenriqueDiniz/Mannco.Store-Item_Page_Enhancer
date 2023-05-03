@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mannco.Store - Item Page Enhancer
 // @namespace    https://github.com/LucasHenriqueDiniz
-// @version      0.35
+// @version      0.351
 // @description  mannco.store - Mannco Store Enhancer is a browser extension that enhances the Mannco Store website with a range of features to make your shopping experience more efficient and streamlined.
 // @author       Lucas Diniz
 // @license      MIT
@@ -27,6 +27,7 @@
     const itemPriceBoxBox = document.querySelector("div.col-xl-4.col-lg-7")
     const pageSidebar = document.querySelector("#page-sidebar")
     const noLogin = document.querySelector('.nologinbo')
+    const sellValue = parseFloat(document.querySelector("#content > div.row > div:nth-child(1) > div > div > span.important-text > span.ecurrency").textContent.replace('$',''))
 
     let highestBuyOrder = Number(document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-8.col-lg-5.mt-md-3 > table > tbody > tr:nth-child(2) > td:nth-child(1)").textContent.slice(1))
     if (isNaN(highestBuyOrder)) {
@@ -680,12 +681,19 @@
     }
     //
     function CheckLucro(BuyOrder) {
-        let FixedOrder = parseFloat(BuyOrder).toFixed(2)
-        var AfterFees = parseFloat(calculateFees(itemPrice));
+        var sellValueNow
 
-        var profit = (AfterFees - FixedOrder).toFixed(2);
-        console.log(FixedOrder, AfterFees, profit);
-        return parseFloat(profit);
+        if (sellValue === 0) {
+            sellValueNow = highestBuyOrder
+        } else {
+            sellValueNow = sellValue
+        }
+            let FixedOrder = parseFloat(BuyOrder).toFixed(2)
+            var AfterFees = parseFloat(calculateFees(sellValueNow));
+
+            var profit = (AfterFees - FixedOrder).toFixed(2);
+            console.log(FixedOrder, AfterFees, profit);
+            return parseFloat(profit);
     }
     //function to update the value of the afterFees function
     function updateAfterFees() {
@@ -1883,12 +1891,10 @@
             //add update function to itemPricebox
             itemPriceBox.addEventListener("input", updateAfterFees);
             itemPriceBox.addEventListener("change", updateAfterFees);
-/*
-            var parentHeight = itemPriceBox.offsetHeight + afterFeesElement.offsetHeight + 10;
-            parentDiv.style.height = parentHeight + "px";
-            parentDiv.style.backgroundColor = '#202334'
-            parentDiv.style.borderRadius = '1rem';
-*/
+
+            quantityBox.addEventListener("input", updateAfterFees);
+            quantityBox.addEventListener("change", updateAfterFees);
+
             document.querySelector("#recipient-username-addon").style.borderBottomRightRadius = '2rem'
             document.querySelector("#recipient-username-addon").style.borderTopRightRadius = '1rem'
             break;
