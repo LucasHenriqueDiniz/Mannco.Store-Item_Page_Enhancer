@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mannco.Store - Item Page Enhancer
 // @namespace    https://github.com/LucasHenriqueDiniz
-// @version      0.32
+// @version      0.35
 // @description  mannco.store - Mannco Store Enhancer is a browser extension that enhances the Mannco Store website with a range of features to make your shopping experience more efficient and streamlined.
 // @author       Lucas Diniz
 // @license      MIT
@@ -22,16 +22,17 @@
 (function () {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //def const DOMS
-    const itemPriceBox = document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.input-group.mb-3 > input");
-    const quantityBox = document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.form-group > input")
-    const itemPriceBoxBox = document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7")
+    const itemPriceBox = document.querySelector("div.input-group.mb-3 > input");
+    const quantityBox = document.querySelector("div.form-group > input")
+    const itemPriceBoxBox = document.querySelector("div.col-xl-4.col-lg-7")
     const pageSidebar = document.querySelector("#page-sidebar")
+    const noLogin = document.querySelector('.nologinbo')
 
     let highestBuyOrder = Number(document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-8.col-lg-5.mt-md-3 > table > tbody > tr:nth-child(2) > td:nth-child(1)").textContent.slice(1))
     if (isNaN(highestBuyOrder)) {
         highestBuyOrder = 0.00
     }
-    const itemPrice = parseFloat(document.querySelector("#content > div.row > div:nth-child(1) > div > div > span.important-text > span").textContent.slice(1))
+    const itemPrice = parseFloat(document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.nologinbo > div.input-group.mb-3 > input").value)
     const quantidadeBuyOrders = document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-8.col-lg-5.mt-md-3 > table > tbody").childElementCount - 1
     const moneyAvaible = parseFloat(document.querySelector("#account-dropdown > div > span.account-balance.ecurrency").textContent.replace('$','').trim())
 
@@ -1663,8 +1664,9 @@
             centOrder.className = "btn btn-primary AutoOrder";
             centOrder.style.marginTop = '5px';
             centOrder.innerHTML = "Boost Order";
+            centOrder.style.gridArea = '5 / 1 / 5 / 2';
             centOrder.title = 'Create a buy order using the (highest buy order value + 0.01)'
-            itemPriceBoxBox.appendChild(centOrder);
+            noLogin.appendChild(centOrder);
             centOrder.addEventListener("click", plusOneCent);
             break;
         case false:
@@ -1681,9 +1683,10 @@
             justOneCent.id = "AutoOrder";
             justOneCent.className = "btn btn-primary AutoOrder";
             justOneCent.style.marginTop = '5px'
+            justOneCent.style.gridArea = '5 / 2 / 5 / 3';
             justOneCent.innerHTML = "Buy for One Cent"
             justOneCent.title = "Create a buy order for 0.01";
-            itemPriceBoxBox.appendChild(justOneCent);
+            noLogin.appendChild(justOneCent);
             justOneCent.addEventListener("click", justOneCentFunction);
             break;
         case false:
@@ -1698,12 +1701,27 @@
     //Organize Buttons
     switch (OrganizeButtons) {
         case true:
-            itemPriceBoxBox.childNodes[11].style.marginLeft = '0'
-            itemPriceBoxBox.childNodes[11].style.display = 'flex';
-            itemPriceBoxBox.childNodes[11].style.flexDirection = 'column';
-            document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > form > button").style.marginTop = '5px';
+            itemPriceBox.parentElement.style.gridArea = '1 / 1 / 2 / 3';
+            quantityBox.parentElement.style.gridArea = '3 / 1 / 3 / 3';
+            if (!document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.nologinbo > form > button").checkVisibility()) {
+                document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.nologinbo > button.btn.btn-primary.addbuyorder").style.gridArea = '4 / 1 / 4 / 3'
+            } else {
+                document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.nologinbo > button.btn.btn-primary.addbuyorder").style.gridArea = '4 / 1 / 4 / 2'
+            }
+            document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.nologinbo > form").style.gridArea = '4 / 2 / 4 / 3'
+            document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.nologinbo > form").style.marginLeft = '0px'
+            document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.nologinbo > form > button").style.width = '100%';
+            document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.nologinbo > form > button").style.height = '100%';
+
+            noLogin.style.marginLeft = '0'
+            noLogin.style.display = 'grid';
+            noLogin.style.gridTemplateColumns = 'repeat(2, 1fr)';
+            noLogin.style.gridTemplateRows = 'repeat(5, 50px)';
+            noLogin.style.gridColumnGap = '3px';
+            noLogin.style.gridRowGap = '3px';
             itemPriceBoxBox.style.display = 'flex';
             itemPriceBoxBox.style.flexDirection = 'column';
+
             break;
         case false:
             console.log('dont organize sadpepe')
@@ -1756,14 +1774,14 @@
     //switch
     switch (ChangeBackGroundForNoBuyOrder) {
         case 'Red/Green Background':
-            if (itemPriceBox.value === highestBuyOrder) {
+            if (itemPrice === highestBuyOrder) {
                 itemPriceBoxBox.parentElement.parentElement.style.backgroundColor = 'green'
             } else {
                 itemPriceBoxBox.parentElement.parentElement.style.backgroundColor = 'red'
             }
             break;
         case 'Red/Green border':
-            if (itemPriceBox.value === highestBuyOrder) {
+            if (itemPrice === highestBuyOrder) {
                 itemPriceBoxBox.parentElement.parentElement.style.borderStyle = 'inset';
                 itemPriceBoxBox.parentElement.parentElement.style.borderRadius = 'inherit';
                 itemPriceBoxBox.parentElement.parentElement.style.borderColor = 'green';
@@ -1855,19 +1873,22 @@
             itemPriceBox.parentNode.appendChild(ProfitElement);
 
             // small fixes
-            itemPriceBoxBox.childNodes[1].style.marginBottom = '25px';
-            itemPriceBoxBox.childNodes[1].style.fontSize = '1.5rem'
+            var boxPriceBox = document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.nologinbo > div.input-group.mb-3")
+            boxPriceBox.style.marginBottom = '25px';
+            boxPriceBox.style.height = '100px';
+            boxPriceBox.style.borderRadius = '1rem';
+            boxPriceBox.style.backgroundColor = '#202334'
+
             itemPriceBox.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
-            itemPriceBox.style.borderRadius = '1rem 0 1rem 0'
             //add update function to itemPricebox
             itemPriceBox.addEventListener("input", updateAfterFees);
             itemPriceBox.addEventListener("change", updateAfterFees);
-
+/*
             var parentHeight = itemPriceBox.offsetHeight + afterFeesElement.offsetHeight + 10;
             parentDiv.style.height = parentHeight + "px";
             parentDiv.style.backgroundColor = '#202334'
             parentDiv.style.borderRadius = '1rem';
-
+*/
             document.querySelector("#recipient-username-addon").style.borderBottomRightRadius = '2rem'
             document.querySelector("#recipient-username-addon").style.borderTopRightRadius = '1rem'
             break;
@@ -1885,14 +1906,10 @@
             itemPriceBoxBox.parentElement.parentElement.style.borderRadius = '1rem'
             itemPriceBoxBox.childNodes[1].style.marginBottom = '10px';
             itemPriceBoxBox.childNodes[1].style.fontSize = '1.5rem'
+            document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > h2 > span").style.textAlign = 'center'
             var cardBodies = document.querySelectorAll('.card-body');
             cardBodies.forEach(cardBody => {
                 cardBody.style.boxShadow = '3 3 15px rgba(0, 0, 0, 0.3)';
-	//remove global alert
-	if (document.querySelector(".global-alert")) {
-	   	document.querySelector("#wrapper > div.global-alert").display = 'none'
-	}
-
             });
             break;
         case false:
