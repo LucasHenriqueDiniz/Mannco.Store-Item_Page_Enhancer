@@ -31,8 +31,10 @@ Mannco Store Enhancer is a browser extension that enhances the Mannco Store webs
 3. Install.
 
 ## Images
-![image](https://user-images.githubusercontent.com/63087780/229917525-b076042d-466f-4029-bd81-5d05ccd2597c.png)
-![image](https://user-images.githubusercontent.com/63087780/229917616-52bcd5e7-cbb2-4c95-8031-3e350c4157d1.png)
+![image](https://user-images.githubusercontent.com/63087780/236070992-9b82e532-9a6f-4eff-8b43-f86e6b545d7b.png)
+![image](https://user-images.githubusercontent.com/63087780/236071126-b8105b9e-1f5a-4ff0-b03f-70d4dff2aa4e.png)
+![image](https://user-images.githubusercontent.com/63087780/236071226-efe778f9-8551-459a-88e5-ac53d6d0073b.png)
+
 
 
 ## Support
