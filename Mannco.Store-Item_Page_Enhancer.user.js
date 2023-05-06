@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Mannco.Store - Item Page Enhancer
 // @namespace    https://github.com/LucasHenriqueDiniz
-// @version      0.351
+// @version      0.37
 // @description  mannco.store - Mannco Store Enhancer is a browser extension that enhances the Mannco Store website with a range of features to make your shopping experience more efficient and streamlined.
 // @author       Lucas Diniz
 // @license      MIT
 // @match        *://mannco.store/item/*
+// @match        *://mannco.store/*/item/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=mannco.store
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -688,12 +689,11 @@
         } else {
             sellValueNow = sellValue
         }
-            let FixedOrder = parseFloat(BuyOrder).toFixed(2)
-            var AfterFees = parseFloat(calculateFees(sellValueNow));
+        let FixedOrder = parseFloat(BuyOrder).toFixed(2)
+        var AfterFees = parseFloat(calculateFees(sellValueNow));
 
-            var profit = (AfterFees - FixedOrder).toFixed(2);
-            console.log(FixedOrder, AfterFees, profit);
-            return parseFloat(profit);
+        var profit = (AfterFees - FixedOrder).toFixed(2);
+        return parseFloat(profit);
     }
     //function to update the value of the afterFees function
     function updateAfterFees() {
@@ -997,7 +997,6 @@
         }
 
         if (verticalMarket.children.length === 4 && !document.querySelector("#hide-arrow\\ markets")) {
-            console.log('3 children')
 
             var colapseButton = document.createElement('div')
             pageSidebar.appendChild(colapseButton)
@@ -1344,6 +1343,7 @@
     // make the extenion button for configs
     document.querySelector("#content > h2").style.display = 'flex';
     document.querySelector("#content > h2").style.justifyContent = 'space-between';
+    document.querySelector("#content > h2").style.alignItems = 'center';
     let ItemPageConfigsButton = document.createElement('button');
     ItemPageConfigsButton.className = "button-configs";
     ItemPageConfigsButton.textContent = "Item Page Enhancer Configs";
@@ -1616,19 +1616,26 @@
 
             salesGraphicBtn.className = "btn btn-primary salesGraphicBtn";
             salesGraphicBtn.title = "Show the sales History graphic with the sales details for this item";
-            //salesGraphicBtn.classList.add("");
             header.appendChild(salesGraphicBtn);
-
             // Define o comportamento do botão
+            if (!(document.querySelector("#content > div:nth-child(3) > div > div").textContent === '')) {
+                document.querySelector("#content > div:nth-child(3) > div > div").style.display = 'none'
+            }
             salesGraphicBtn.addEventListener('click', () => {
                 if (salesGraphicBtn.dataset.value === "off") {
                     salesGraphicBtn.dataset.value = "on";
                     salesGraphicBtn.textContent = "Show sales graphic";
                     content.style.maxHeight = "50px";
+                    if (!(document.querySelector("#content > div:nth-child(3) > div > div").textContent === '')) {
+                        document.querySelector("#content > div:nth-child(3) > div > div").style.display = 'none'
+                    }
                 } else {
                     salesGraphicBtn.dataset.value = "off";
                     salesGraphicBtn.textContent = "Hide sales graphic";
                     content.style.maxHeight = "500px";
+                    if (!(document.querySelector("#content > div:nth-child(3) > div > div").textContent === '')) {
+                        document.querySelector("#content > div:nth-child(3) > div > div").style.display = 'block'
+                    }
                 }
             });
             break;
@@ -1724,12 +1731,19 @@
             noLogin.style.marginLeft = '0'
             noLogin.style.display = 'grid';
             noLogin.style.gridTemplateColumns = 'repeat(2, 1fr)';
-            noLogin.style.gridTemplateRows = 'repeat(5, 50px)';
+            noLogin.style.gridTemplateRows = 'repeat(6, 50px)';
             noLogin.style.gridColumnGap = '3px';
             noLogin.style.gridRowGap = '3px';
             itemPriceBoxBox.style.display = 'flex';
             itemPriceBoxBox.style.flexDirection = 'column';
-
+            try {
+                var noCaptcha = document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.nologinbo > div.cf-turnstile")
+                noCaptcha.style.gridArea = '6 / 1 / 6 / 3'
+                noCaptcha.style.display = 'flex';
+                noCaptcha.style.justifyContent = 'center';
+            } catch (err) {
+                console.log('nocapctha', err)
+            }
             break;
         case false:
             console.log('dont organize sadpepe')
@@ -1897,6 +1911,12 @@
 
             document.querySelector("#recipient-username-addon").style.borderBottomRightRadius = '2rem'
             document.querySelector("#recipient-username-addon").style.borderTopRightRadius = '1rem'
+
+            //update if already has a value
+            if (itemPrice > 0) {
+                updateAfterFees()
+            }
+
             break;
         case false:
             break;
@@ -1907,10 +1927,17 @@
     //small fixes
     switch (smallFixes) {
         case true:
+            //align itemimage
+            document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item").style.display = 'flex'
+            document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item").style.flexDirection = 'column';
+            document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > img").style.maxWidth = '100%'
+            document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > img").style.alignSelf = 'center';
+            document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > img").style.display = 'flex';
+
             document.querySelector("#header-navbar > ul.navbar-nav.header__navbar-links > li:nth-child(1)").remove()
             document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > p").style.display = 'none'
             itemPriceBoxBox.parentElement.parentElement.style.borderRadius = '1rem'
-            itemPriceBoxBox.childNodes[1].style.marginBottom = '10px';
+            itemPriceBoxBox.childNodes[1].style.marginBottom = '20px';
             itemPriceBoxBox.childNodes[1].style.fontSize = '1.5rem'
             document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > h2 > span").style.textAlign = 'center'
             var cardBodies = document.querySelectorAll('.card-body');
@@ -1996,7 +2023,7 @@
             })
 
             var itemNameText = document.querySelector("#page-sidebar > div.card.mb-0 > div > div.card-item > h2 > span")
-             googleIcon('content_copy', 'scale-arrow text-copy', itemNameText, 'font-size: 1.25rem; translate: 0px -0.5rem;')
+            googleIcon('content_copy', 'scale-arrow text-copy', itemNameText, 'font-size: 1.25rem; translate: 0px -0.5rem;')
             document.querySelector("#scale-arrow\\ text-copy").addEventListener('click', () => {
                 console.log(`copied the name to the clipboard, price = ${itemName}`)
                 GM_setClipboard(itemName)
